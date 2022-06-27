@@ -1,13 +1,11 @@
-import React from 'react';
-
-export default function Checkbox({ name, value, handleChange }) {
+export default ({ name, value, handleChange }) => {
     return (
         <input
             type="checkbox"
             name={name}
             value={value}
-            className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            className="text-purple-500 border-gray-300 rounded focus:border-purple-300 focus:ring focus:ring-purple-500 dark:border-gray-600 dark:bg-dark-eval-1 dark:focus:ring-offset-dark-eval-1"
             onChange={(e) => handleChange(e)}
         />
     );
-}
+};

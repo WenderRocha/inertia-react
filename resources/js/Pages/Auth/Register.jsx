@@ -1,108 +1,181 @@
-import React, { useEffect } from 'react';
-import Button from '@/Components/Button';
-import Guest from '@/Layouts/Guest';
-import Input from '@/Components/Input';
-import Label from '@/Components/Label';
-import ValidationErrors from '@/Components/ValidationErrors';
-import { Head, Link, useForm } from '@inertiajs/inertia-react';
+import { useEffect } from "react";
+import {
+    UserIcon,
+    MailIcon,
+    LockClosedIcon,
+    UserAddIcon,
+} from "@heroicons/react/outline";
+import { Link, useForm } from "@inertiajs/inertia-react";
+import Guest from "@/Layouts/Guest";
+import ValidationErrors from "@/Components/ValidationErrors";
+import InputIconWrapper from "@/Components/InputIconWrapper";
+import Label from "@/Components/Label";
+import Input from "@/Components/Input";
+import Button from "@/Components/Button";
 
-export default function Register() {
+export default () => {
     const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: '',
+        name: "",
+        email: "",
+        password: "",
+        password_confirmation: "",
     });
 
     useEffect(() => {
         return () => {
-            reset('password', 'password_confirmation');
+            reset("password", "password_confirmation");
         };
     }, []);
 
     const onHandleChange = (event) => {
-        setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
+        setData(
+            event.target.name,
+            event.target.type === "checkbox"
+                ? event.target.checked
+                : event.target.value
+        );
     };
 
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('register'));
+        post(route("register"));
     };
 
     return (
-        <Guest>
-            <Head title="Register" />
-
+        <Guest title="Register">
             <ValidationErrors errors={errors} />
 
             <form onSubmit={submit}>
-                <div>
-                    <Label forInput="name" value="Name" />
+                <div className="grid gap-6">
+                    {/* Name */}
+                    <div className="space-y-2">
+                        <Label forInput="name" value="Name" />
 
-                    <Input
-                        type="text"
-                        name="name"
-                        value={data.name}
-                        className="mt-1 block w-full"
-                        autoComplete="name"
-                        isFocused={true}
-                        handleChange={onHandleChange}
-                        required
-                    />
-                </div>
+                        <InputIconWrapper
+                            icon={
+                                <UserIcon
+                                    aria-hidden="true"
+                                    className="w-5 h-5"
+                                />
+                            }
+                        >
+                            <Input
+                                type="text"
+                                name="name"
+                                placeholder="Name"
+                                value={data.name}
+                                className="block w-full"
+                                autoComplete="name"
+                                isFocused={true}
+                                handleChange={onHandleChange}
+                                required
+                                withIcon
+                            />
+                        </InputIconWrapper>
+                    </div>
 
-                <div className="mt-4">
-                    <Label forInput="email" value="Email" />
+                    {/* Email */}
+                    <div className="space-y-2">
+                        <Label forInput="email" value="Email" />
 
-                    <Input
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        handleChange={onHandleChange}
-                        required
-                    />
-                </div>
+                        <InputIconWrapper
+                            icon={
+                                <MailIcon
+                                    aria-hidden="true"
+                                    className="w-5 h-5"
+                                />
+                            }
+                        >
+                            <Input
+                                type="email"
+                                name="email"
+                                placeholder="Email"
+                                value={data.email}
+                                className="block w-full mt-1"
+                                autoComplete="username"
+                                handleChange={onHandleChange}
+                                required
+                                withIcon
+                            />
+                        </InputIconWrapper>
+                    </div>
 
-                <div className="mt-4">
-                    <Label forInput="password" value="Password" />
+                    {/* Password */}
+                    <div className="space-y-2">
+                        <Label forInput="password" value="Password" />
 
-                    <Input
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                        handleChange={onHandleChange}
-                        required
-                    />
-                </div>
+                        <InputIconWrapper
+                            icon={
+                                <LockClosedIcon
+                                    aria-hidden="true"
+                                    className="w-5 h-5"
+                                />
+                            }
+                        >
+                            <Input
+                                type="password"
+                                name="password"
+                                placeholder="Password"
+                                value={data.password}
+                                className="block w-full mt-1"
+                                autoComplete="new-password"
+                                handleChange={onHandleChange}
+                                required
+                                withIcon
+                            />
+                        </InputIconWrapper>
+                    </div>
 
-                <div className="mt-4">
-                    <Label forInput="password_confirmation" value="Confirm Password" />
+                    {/* Password confirmation */}
+                    <div className="space-y-2">
+                        <Label
+                            forInput="password_confirmation"
+                            value="Confirm Password"
+                        />
 
-                    <Input
-                        type="password"
-                        name="password_confirmation"
-                        value={data.password_confirmation}
-                        className="mt-1 block w-full"
-                        handleChange={onHandleChange}
-                        required
-                    />
-                </div>
+                        <InputIconWrapper
+                            icon={
+                                <LockClosedIcon
+                                    aria-hidden="true"
+                                    className="w-5 h-5"
+                                />
+                            }
+                        >
+                            <Input
+                                type="password"
+                                name="password_confirmation"
+                                placeholder="Confirm Password"
+                                value={data.password_confirmation}
+                                className="block w-full mt-1"
+                                handleChange={onHandleChange}
+                                required
+                                withIcon
+                            />
+                        </InputIconWrapper>
+                    </div>
 
-                <div className="flex items-center justify-end mt-4">
-                    <Link href={route('login')} className="underline text-sm text-gray-600 hover:text-gray-900">
-                        Already registered?
-                    </Link>
-
-                    <Button className="ml-4" processing={processing}>
-                        Register
+                    {/* Submit */}
+                    <Button
+                        className="justify-center w-full gap-2"
+                        processing={processing}
+                    >
+                        <UserAddIcon aria-hidden="true" className="w-6 h-6" />
+                        <span>Register</span>
                     </Button>
+
+                    {/* Login link */}
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                        Already have an account?{" "}
+                        <Link
+                            href={route("login")}
+                            className="text-blue-500 hover:underline"
+                        >
+                            Login
+                        </Link>
+                    </p>
                 </div>
             </form>
         </Guest>
     );
-}
+};

@@ -1,22 +1,24 @@
-import React, { useEffect } from 'react';
-import Button from '@/Components/Button';
-import Guest from '@/Layouts/Guest';
-import Input from '@/Components/Input';
-import Label from '@/Components/Label';
-import ValidationErrors from '@/Components/ValidationErrors';
-import { Head, useForm } from '@inertiajs/inertia-react';
+import { useEffect } from "react";
+import { useForm } from "@inertiajs/inertia-react";
+import { MailIcon, LockClosedIcon } from "@heroicons/react/outline";
+import Guest from "@/Layouts/Guest";
+import ValidationErrors from "@/Components/ValidationErrors";
+import InputIconWrapper from "@/Components/InputIconWrapper";
+import Label from "@/Components/Label";
+import Input from "@/Components/Input";
+import Button from "@/Components/Button";
 
-export default function ResetPassword({ token, email }) {
+export default ({ token, email }) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         token: token,
         email: email,
-        password: '',
-        password_confirmation: '',
+        password: "",
+        password_confirmation: "",
     });
 
     useEffect(() => {
         return () => {
-            reset('password', 'password_confirmation');
+            reset("password", "password_confirmation");
         };
     }, []);
 
@@ -27,62 +29,99 @@ export default function ResetPassword({ token, email }) {
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('password.update'));
+        post(route("password.update"));
     };
 
     return (
-        <Guest>
-            <Head title="Reset Password" />
-
+        <Guest title="Reset Password">
             <ValidationErrors errors={errors} />
 
             <form onSubmit={submit}>
-                <div>
-                    <Label forInput="email" value="Email" />
+                <div className="grid gap-6">
+                    <div className="space-y-2">
+                        <Label forInput="email" value="Email" />
 
-                    <Input
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        handleChange={onHandleChange}
-                    />
-                </div>
+                        <InputIconWrapper
+                            icon={
+                                <MailIcon
+                                    aria-hidden="true"
+                                    className="w-5 h-5"
+                                />
+                            }
+                        >
+                            <Input
+                                type="email"
+                                name="email"
+                                placeholder="Email"
+                                value={data.email}
+                                className="block w-full mt-1"
+                                autoComplete="username"
+                                handleChange={onHandleChange}
+                                withIcon
+                            />
+                        </InputIconWrapper>
+                    </div>
 
-                <div className="mt-4">
-                    <Label forInput="password" value="Password" />
+                    <div className="space-y-2">
+                        <Label forInput="password" value="Password" />
 
-                    <Input
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                        isFocused={true}
-                        handleChange={onHandleChange}
-                    />
-                </div>
+                        <InputIconWrapper
+                            icon={
+                                <LockClosedIcon
+                                    aria-hidden="true"
+                                    className="w-5 h-5"
+                                />
+                            }
+                        >
+                            <Input
+                                type="password"
+                                name="password"
+                                placeholder="Password"
+                                value={data.password}
+                                className="block w-full mt-1"
+                                autoComplete="new-password"
+                                isFocused={true}
+                                handleChange={onHandleChange}
+                                withIcon
+                            />
+                        </InputIconWrapper>
+                    </div>
 
-                <div className="mt-4">
-                    <Label forInput="password_confirmation" value="Confirm Password" />
+                    <div className="space-y-2">
+                        <Label
+                            forInput="password_confirmation"
+                            value="Confirm Password"
+                        />
 
-                    <Input
-                        type="password"
-                        name="password_confirmation"
-                        value={data.password_confirmation}
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                        handleChange={onHandleChange}
-                    />
-                </div>
+                        <InputIconWrapper
+                            icon={
+                                <LockClosedIcon
+                                    aria-hidden="true"
+                                    className="w-5 h-5"
+                                />
+                            }
+                        >
+                            <Input
+                                type="password"
+                                name="password_confirmation"
+                                placeholder="Confirm Password"
+                                value={data.password_confirmation}
+                                className="block w-full mt-1"
+                                autoComplete="new-password"
+                                handleChange={onHandleChange}
+                                withIcon
+                            />
+                        </InputIconWrapper>
+                    </div>
 
-                <div className="flex items-center justify-end mt-4">
-                    <Button className="ml-4" processing={processing}>
+                    <Button
+                        className="justify-center w-full"
+                        processing={processing}
+                    >
                         Reset Password
                     </Button>
                 </div>
             </form>
         </Guest>
     );
-}
+};

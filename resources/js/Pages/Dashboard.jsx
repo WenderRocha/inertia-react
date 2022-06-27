@@ -1,23 +1,35 @@
-import React from 'react';
 import Authenticated from '@/Layouts/Authenticated';
-import { Head } from '@inertiajs/inertia-react';
+import Button from '@/Components/Button';
+import { GithubIcon } from '@/Components/Icons/brands';
 
-export default function Dashboard(props) {
+export default (props) => {
     return (
         <Authenticated
+            title="Dashboard"
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>}
-        >
-            <Head title="Dashboard" />
+            header={
+                <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                    <h2 className="text-xl font-semibold leading-tight">
+                        Dashboard
+                    </h2>
 
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 bg-white border-b border-gray-200">You're logged in!</div>
-                    </div>
+                    <Button
+                        external
+                        variant="black"
+                        target="_blank"
+                        className="justify-center gap-2 max-w-xs"
+                        href="https://github.com/kamona-wd/kui-laravel-breeze"
+                    >
+                        <GithubIcon aria-hidden="true" className="w-6 h-6" />
+                        <span>Star on Github</span>
+                    </Button>
                 </div>
+            }
+        >
+            <div className="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">
+                You're logged in!
             </div>
         </Authenticated>
     );
-}
+};
