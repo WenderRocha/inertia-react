@@ -1,7 +1,8 @@
 import Authenticated from '@/Layouts/Authenticated';
 import Button from '@/Components/Button';
 import { GithubIcon } from '@/Components/Icons/brands';
-import Form from './Components/Form';
+import ChartBar from '@/Components/Chart/ChartBar';
+
 
 export default (props) => {
     return (
@@ -28,7 +29,7 @@ export default (props) => {
                 </div>
             }>
             <div className="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">
-                <Form/>
+                <ChartBar/>
             </div>
         </Authenticated>
     );
