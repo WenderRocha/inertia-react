@@ -2,6 +2,15 @@ import React, { useState } from "react";
 import Chart from "react-apexcharts";
 
 function ChartBar(props) {
+    
+    const currency = function (number) {
+        return new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+            minimumFractionDigits: 2,
+        }).format(number);
+    };
+
     let state = {
         options: {
             chart: {
@@ -11,7 +20,7 @@ function ChartBar(props) {
             plotOptions: {
                 bar: {
                     horizontal: false,
-                    columnWidth: "55%",
+                    columnWidth: "80%",
                     endingShape: "rounded",
                 },
             },
@@ -25,29 +34,28 @@ function ChartBar(props) {
             },
             xaxis: {
                 categories: [
-                    "Feb",
+                    "Jan",
+                    "Fev",
                     "Mar",
-                    "Apr",
-                    "May",
+                    "Abr",
+                    "Mai",
                     "Jun",
                     "Jul",
-                    "Aug",
-                    "Sep",
-                    "Oct",
+                    "Ago",
+                    "Set",
+                    "Out",
+                    "Nov",
+                    "Dez",
                 ],
             },
-            yaxis: {
-                title: {
-                    text: "$ (thousands)",
-                },
-            },
+
             fill: {
                 opacity: 1,
             },
             tooltip: {
                 y: {
                     formatter: function (val) {
-                        return "$ " + val + " thousands";
+                        return currency(val) + " Reais";
                     },
                 },
             },
@@ -56,15 +64,29 @@ function ChartBar(props) {
         series: [
             {
                 name: "Deposito",
-                data: [44, 55, 57, 56, 61, 58, 63, 60, 66],
+                data: [44, 55, 57, 56, 61, 58, 63, 60, 66, 63, 60, 66],
+            },
+            {
+                name: "Receita",
+                data: [36, 85, 101, 98, 87, 105, 91, 114, 94, 91, 114, 94],
             },
             {
                 name: "Lucro",
-                data: [76, 85, 101, 98, 87, 105, 91, 114, 94],
+                data: [12, 41, 36, 26, 45, 48, 52, 53, 41, 52, 53, 41],
             },
+        ],
+
+        responsive: [
             {
-                name: "Retirada",
-                data: [35, 41, 36, 26, 45, 48, 52, 53, 41],
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 200,
+                    },
+                    legend: {
+                        position: "bottom",
+                    },
+                },
             },
         ],
     };
@@ -74,6 +96,7 @@ function ChartBar(props) {
             <Chart
                 options={state.options}
                 series={state.series}
+                responsive={state.responsive}
                 type="bar"
                 width="500"
             />

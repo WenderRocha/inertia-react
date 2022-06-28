@@ -4430,6 +4430,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function ChartBar(props) {
+  var currency = function currency(number) {
+    return new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+      minimumFractionDigits: 2
+    }).format(number);
+  };
+
   var state = {
     options: {
       chart: {
@@ -4439,7 +4447,7 @@ function ChartBar(props) {
       plotOptions: {
         bar: {
           horizontal: false,
-          columnWidth: "55%",
+          columnWidth: "80%",
           endingShape: "rounded"
         }
       },
@@ -4452,12 +4460,7 @@ function ChartBar(props) {
         colors: ["transparent"]
       },
       xaxis: {
-        categories: ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"]
-      },
-      yaxis: {
-        title: {
-          text: "$ (thousands)"
-        }
+        categories: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
       },
       fill: {
         opacity: 1
@@ -4465,26 +4468,38 @@ function ChartBar(props) {
       tooltip: {
         y: {
           formatter: function formatter(val) {
-            return "$ " + val + " thousands";
+            return currency(val) + " Reais";
           }
         }
       }
     },
     series: [{
       name: "Deposito",
-      data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
+      data: [44, 55, 57, 56, 61, 58, 63, 60, 66, 63, 60, 66]
+    }, {
+      name: "Receita",
+      data: [36, 85, 101, 98, 87, 105, 91, 114, 94, 91, 114, 94]
     }, {
       name: "Lucro",
-      data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
-    }, {
-      name: "Retirada",
-      data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
+      data: [12, 41, 36, 26, 45, 48, 52, 53, 41, 52, 53, 41]
+    }],
+    responsive: [{
+      breakpoint: 480,
+      options: {
+        chart: {
+          width: 200
+        },
+        legend: {
+          position: "bottom"
+        }
+      }
     }]
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_apexcharts__WEBPACK_IMPORTED_MODULE_1__["default"], {
       options: state.options,
       series: state.series,
+      responsive: state.responsive,
       type: "bar",
       width: "500"
     })
