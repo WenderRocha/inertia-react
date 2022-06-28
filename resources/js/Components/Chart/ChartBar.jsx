@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Chart from "react-apexcharts";
 
 function ChartBar(props) {
-    
+
     const currency = function (number) {
         return new Intl.NumberFormat("pt-BR", {
             style: "currency",
@@ -13,9 +13,14 @@ function ChartBar(props) {
 
     let state = {
         options: {
+            theme: {
+                mode: "dark",
+            },
+
             chart: {
                 type: "bar",
                 height: 350,
+                background: "transparent",
             },
             plotOptions: {
                 bar: {
@@ -75,24 +80,11 @@ function ChartBar(props) {
                 data: [12, 41, 36, 26, 45, 48, 52, 53, 41, 52, 53, 41],
             },
         ],
-
-        responsive: [
-            {
-                breakpoint: 480,
-                options: {
-                    chart: {
-                        width: 200,
-                    },
-                    legend: {
-                        position: "bottom",
-                    },
-                },
-            },
-        ],
     };
 
     return (
         <>
+            
             <Chart
                 options={state.options}
                 series={state.series}
