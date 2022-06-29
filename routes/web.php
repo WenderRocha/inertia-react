@@ -25,11 +25,25 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('Dashboard', ['name'=> 'zika memo']);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/components/buttons', function () {
     return Inertia::render('Components/Buttons');
 })->middleware(['auth', 'verified'])->name('components.buttons');
+
+
+
+
+
+Route::get('/users', function() {
+
+    return Inertia::render('Users');
+
+})->middleware(['auth', 'verified'])->name('users');
+
+
+
+
 
 require __DIR__ . '/auth.php';

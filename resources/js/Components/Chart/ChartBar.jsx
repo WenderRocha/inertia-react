@@ -1,8 +1,6 @@
-import React, { useState } from "react";
 import Chart from "react-apexcharts";
 
 function ChartBar(props) {
-
     const currency = function (number) {
         return new Intl.NumberFormat("pt-BR", {
             style: "currency",
@@ -14,7 +12,8 @@ function ChartBar(props) {
     let state = {
         options: {
             theme: {
-                mode: "dark",
+                mode: "light",
+                palette: "palette2",
             },
 
             chart: {
@@ -84,14 +83,7 @@ function ChartBar(props) {
 
     return (
         <>
-            
-            <Chart
-                options={state.options}
-                series={state.series}
-                responsive={state.responsive}
-                type="bar"
-                width="500"
-            />
+            <Chart options={state.options} series={state.series} type="bar" />
         </>
     );
 }

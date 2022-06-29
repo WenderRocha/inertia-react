@@ -1,11 +1,11 @@
-import PerfectScrollbar from '@/Components/PerfectScrollbar';
-import { DashboardIcon } from '@/Components/Icons/outline';
+import PerfectScrollbar from "@/Components/PerfectScrollbar";
+import { DashboardIcon } from "@/Components/Icons/outline";
 import {
     SidebarLink,
     SidebarCollapsibleItem,
     SidebarCollapsible,
-} from '@/Components/Sidebar/Sidebar';
-import { TemplateIcon } from '@heroicons/react/outline';
+} from "@/Components/Sidebar/Sidebar";
+import { TemplateIcon } from "@heroicons/react/outline";
 
 export default () => {
     return (
@@ -14,9 +14,21 @@ export default () => {
             className="flex flex-col flex-1 max-h-full gap-4 px-3"
         >
             <SidebarLink
-                title={'Dashboard'}
-                href={route('dashboard')}
-                active={route().current('dashboard')}
+                title={"Dashboard"}
+                href={route("dashboard")}
+                active={route().current("dashboard")}
+                icon={
+                    <DashboardIcon
+                        aria-hidden="true"
+                        className="flex-shrink-0 w-6 h-6"
+                    />
+                }
+            />
+
+            <SidebarLink
+                title={"Usuarios"}
+                href={route("users")}
+                active={route().current("users")}
                 icon={
                     <DashboardIcon
                         aria-hidden="true"
@@ -27,13 +39,13 @@ export default () => {
 
             <SidebarCollapsible
                 title="Components"
-                active={route().current('components.*')}
+                active={route().current("components.*")}
                 icon={<TemplateIcon aria-hidden="true" className="w-6 h-6" />}
             >
                 <SidebarCollapsibleItem
-                    href={route('components.buttons')}
+                    href={route("components.buttons")}
                     title="Buttons"
-                    active={route().current('components.buttons')}
+                    active={route().current("components.buttons")}
                 />
             </SidebarCollapsible>
         </PerfectScrollbar>
