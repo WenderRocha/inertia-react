@@ -1,5 +1,5 @@
 import PerfectScrollbar from "@/Components/PerfectScrollbar";
-import { DashboardIcon } from "@/Components/Icons/outline";
+import { DashboardIcon, TradesIcon } from "@/Components/Icons/outline";
 import {
     SidebarLink,
     SidebarCollapsibleItem,
@@ -26,11 +26,11 @@ export default () => {
             />
 
             <SidebarLink
-                title={"Usuarios"}
-                href={route("users")}
-                active={route().current("users")}
+                title={"Trades"}
+                href={route("trades.index")}
+                active={route().current("trades.index")}
                 icon={
-                    <DashboardIcon
+                    <TradesIcon
                         aria-hidden="true"
                         className="flex-shrink-0 w-6 h-6"
                     />

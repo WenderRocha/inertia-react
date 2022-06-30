@@ -36,11 +36,11 @@ Route::get('/components/buttons', function () {
 
 
 
-Route::get('/users', function() {
+Route::get('/trades', function() {
 
-    return Inertia::render('Users');
+    return Inertia::render('Trade');
 
-})->middleware(['auth', 'verified'])->name('users');
+})->middleware(['auth', 'verified'])->name('trades.index');
 
 
 
